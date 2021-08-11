@@ -1,14 +1,28 @@
 {
-  "name": "static-site",
+  "name": "readme-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple CLI application for creating and writing a descriptive ReadMe file for projects.",
   "main": "index.js",
+  "dependencies": {
+    "inquirer": "^6.5.2"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElijahRomer/ReadMeGenerator.git"
+  },
+  "keywords": [
+    "CLI",
+    "readme",
+    "generator"
+  ],
+  "author": "Elijah Romer",
   "license": "ISC",
-  "dependencies": {
-    "inquirer": "^6.5.2"
-  }
+  "bugs": {
+    "url": "https://github.com/ElijahRomer/ReadMeGenerator/issues"
+  },
+  "homepage": "https://github.com/ElijahRomer/ReadMeGenerator#readme"
 }
