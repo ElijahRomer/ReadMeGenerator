@@ -11,13 +11,28 @@ const questions = [
     default: "test"
   },
   { type: "input",
+    name: "imagePath",
+    message: "If you would like to add a screenshot of your application, please copy and paste the relative path or URL here. Otherwise, hit enter to skip.",
+    default: ""
+  },
+      { type: "input",
+        name: "imageAltText",
+        message: "Enter the alt text for your image",
+        when: (answers) => answers.imagePath !== ""
+      },
+      { type: "input",
+        name: "imageHoverText",
+        message: "Enter the text to appear when image is hovered over.",
+        when: (answers) => answers.imagePath !== ""
+      },
+  { type: "input",
     name: "title",
     message: "What is the title of your application?",
     default: "Awesome Application"
   },
   { type: "input",
     name: "description",
-    message: "Please enter a detailed description of your application.",
+    message: "Please enter a short description of your application.",
     default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
   },
   { type: "input",
@@ -47,22 +62,24 @@ const questions = [
   },
   { type: "list",
     name: "license",
-    message: "Please select the usage license for this application:",
+    message: "Please select the usage license for this application, or hit enter to skip",
     choices: [
+      ``,
+      new inquirer.Separator(`------`),
       `Apache 2.0`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `GNU GPL v3`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `GNU GPL v2`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `ISC`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `MIT`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `MPL 2.0`, 
-      new inquirer.Separator(`******`), 
+      new inquirer.Separator(`------`), 
       `The Unlicense`, 
-      new inquirer.Separator(`******`)
+      new inquirer.Separator(`------`)
     ]
   },
 ];
