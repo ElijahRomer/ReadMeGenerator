@@ -117,8 +117,6 @@ This section is included so that the user may enter instructions for installing 
 
 **_Usage_** `(Text Editor Prompt)`
 
-This prompt will open the default text editor to allow the user to edit and write in a more user-friendly fashion.
-
 This section is included so that the user may include documentation and instructions for using their application. It may be used for enumerating functionalities, listing commands and options, and how to achieve success in use of the application.
 
 **_Contribution_** `(Text Editor Prompt)`
