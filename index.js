@@ -3,66 +3,108 @@ const inquirer = require(`inquirer`);
 const fs = require(`fs`);
 const generateMarkdown = require (`./utils/generateMarkdown`);
 
+const possibleSections = [
+  `Installation`,
+  `Usage`,
+  `Contribution`,
+  `Testing`,
+  `License`,
+  `Questions`
+]
+
 // TODO: Create an array of questions for user input
 const questions = [
   { type: "input",
     name: "fileName",
-    message: "Please enter the name of your readme file excluding the extension",
-    default: "test"
+    message: "Please enter the name for your readme file, NOT INCLUDING the file extension",
+    default: "README"
+  },
+  { type: "input",
+  name: "title",
+  message: "What is the title of your application?",
+  default: "Awesome Application"
+  },
+  { type: "input",
+  name: "description",
+  message: "Please enter a short description of your application.",
+  default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
   },
   { type: "input",
     name: "imagePath",
     message: "If you would like to add a screenshot of your application, please copy and paste the relative path or URL here. Otherwise, hit enter to skip.",
-    default: ""
+    default: "instructions\\kitty.jpg"
   },
       { type: "input",
         name: "imageAltText",
         message: "Enter the alt text for your image",
+        default: "Kitteh",
         when: (answers) => answers.imagePath !== ""
       },
       { type: "input",
         name: "imageHoverText",
         message: "Enter the text to appear when image is hovered over.",
+        default: "Cute lil' kitteh",
         when: (answers) => answers.imagePath !== ""
       },
-  { type: "input",
-    name: "title",
-    message: "What is the title of your application?",
-    default: "Awesome Application"
+  { type: "checkbox",
+    name: "includeSections",
+    message: "Please select which other sections you would like your readme to include. (ALL are selected by default)",
+    choices: possibleSections,
+    default: possibleSections
   },
   { type: "input",
-    name: "description",
-    message: "Please enter a short description of your application.",
-    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
-  },
-  { type: "input",
-    name: "installation",
+    name: "Installation",
     message: "Please enter Installation instructions for your application.",
-    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
+    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut.",
+    when: (answers) => answers.includeSections.includes("Installation")
   },
   { type: "input",
-    name: "usage",
-    message: "Please enter usage information for your application.",
-    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
+    name: "Usage",
+    message: "Please enter a detailed description of how to use your application.",
+    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut.",
+    when: (answers) => answers.includeSections.includes("Usage")
   },
   { type: "input",
-    name: "contribution",
+    name: "Contribution",
     message: "Please enter guidelines for individuals looking to contribute to your application.",
-    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
+    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut.",
+    when: (answers) => answers.includeSections.includes("Contribution")
   },
   { type: "input",
-    name: "testing",
+    name: "Testing",
     message: "Please enter instructions for users to test your application.",
-    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut."
+    default: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit rerum quod, animi unde dolor veniam voluptates accusamus magni eaque omnis odit libero earum deserunt accusantium molestiae ipsa nostrum quidem ut.",
+    when: (answers) => answers.includeSections.includes("Testing")
   },
   { type: "input",
-    name: "github",
-    message: "Please enter your github username to add to the additional questions section.",
-    default: "ElijahRomer"
+    name: "Questions",
+    message: "Please enter guidelines for getting in contact with you if users have further questions. \n***Do not include specific contact methods, as those will be in the next prompt.",
+    default: "I am open to questions and may be reached at the following!",
+    when: (answers) => answers.includeSections.includes("Questions")
   },
+  { type: "checkbox",
+    name: "ContactMethods",
+    message: "Please select the ways in which users may contact you",
+    default: [`Email`,`GitHub`],
+    choices: [`Email`,`GitHub`],
+    when: (answers) => answers.includeSections.includes("Questions")
+  },
+      { type: "input",
+        name: "GitHub",
+        message: "Please enter your GitHub username to populate to contact methods.",
+        default: "ElijahRomer",
+        when: (answers) => answers.ContactMethods.includes(`GitHub`)
+      },
+      { type: "input",
+        name: "Email",
+        message: "Please enter your Email to populate to contact methods.",
+        default: "Romere88@gmail.com",
+        when: (answers) => answers.ContactMethods.includes(`Email`)
+      },
   { type: "list",
-    name: "license",
+    name: "License",
     message: "Please select the usage license for this application, or hit enter to skip",
+    pageSize: 16,
     choices: [
       ``,
       new inquirer.Separator(`------`),
@@ -80,7 +122,8 @@ const questions = [
       new inquirer.Separator(`------`), 
       `The Unlicense`, 
       new inquirer.Separator(`------`)
-    ]
+    ],
+    when: (answers) => answers.includeSections.includes("License")
   },
 ];
 
@@ -89,7 +132,7 @@ function writeToFile(fileName, data) {
   let markdown = generateMarkdown(data);
   fs.writeFile(`${fileName}.md`, markdown, (err) => {
     if (err) {
-      console.log(`something went wrong line 67`, err);
+      console.log(`something went wrong line 122`, err);
     }
     else {console.log(`Data Written`)}
   })
@@ -99,8 +142,8 @@ function writeToFile(fileName, data) {
 function init() {
 inquirer.prompt(questions)
 .then((answers) => {
-  console.log(`line 60`, answers)
-  console.log(`line 61`, answers.fileName)
+  console.log(`line 132`, answers)
+  console.log(`line 133`, answers.fileName)
   writeToFile(answers.fileName, answers)
 })}
 

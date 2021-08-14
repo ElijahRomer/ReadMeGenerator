@@ -86,75 +86,120 @@ function licenseLegalTerms(license) {
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseTableOfContents(license) {
-  return license === "" ? "" : "1. [License Information](#license-information)"
-}
-function renderLicenseSection(license) {
-  if (!license) return "";
-  return `
-  ---
-  ## License Information
 
-  This application is licensed under **${licenseNameVerbose(license)}**.
-  
-  Click the license badge below for more information and usage guidelines:
-
-  ${renderLicenseBadge(license)}
-  
-  Click [here](${licenseLegalTerms(license)}
-    "${license} Full Terms and Conditions") to view the full terms and conditions text of ${license}.`
-}
 
 function renderAppScreenshot(imagePath, altText, hoverText) {
   if (imagePath === ""){
     return ""
   }
-  return  `![${altText}](${url} "${hoverText}")`
+  return  `![${altText}](${imagePath} "${hoverText}")`
 }
 
+function renderTableOfContents(includedSectionArray) {
+  let tableOfContents = `## Table of Contents`;
+  for (let i = 0; i < includedSectionArray.length; i++) {
+    tableOfContents += `\n1. [${includedSectionArray[i]}](#${includedSectionArray[i].toLowerCase()})`;
+  }
+  console.log("The result is: ", tableOfContents);
+  return tableOfContents;
+};
+
+function renderLicenseSection(license) {
+  return `## License
+  
+  This application is licensed under **${licenseNameVerbose(license)}**.
+  
+  Click the license badge below for more information and usage guidelines:
+  
+  ${renderLicenseBadge(license)}
+  
+  Click [here](${licenseLegalTerms(license)}
+  "${license} Full Terms and Conditions") to view the full terms and conditions text of ${license}.
+  
+  ---
+  
+  `
+};
+
+function renderQuestionsSection(data) {
+  return `## Questions
+  
+${data.Questions}
+
+* GitHub: [${data.GitHub}](https://www.github.com/${data.GitHub} "Click to view my projects!")
+* Email: [${data.Email}](mailto:${data.Email} "Click to send me an Email!")
+
+Thank you and I will get back to you shortly! :)
+
+---
+
+  `
+}
+
+function renderSelectedSections(includedSectionArray, data) {
+  let sections = ``;
+  for (let i = 0; i < includedSectionArray.length; i++) {
+    if (includedSectionArray[i] === `License`){
+      sections += renderLicenseSection(data.License);
+      continue;
+    } else if (includedSectionArray[i] === `Questions`) {
+      sections += renderQuestionsSection(data)
+      continue;
+    }
+    sections += `## ${includedSectionArray[i]}
+    
+${data[includedSectionArray[i]]}
+
+---
+
+`;
+  }
+  console.log("The sections returned are as follows:", sections)
+  return sections;
+}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title} ${renderLicenseBadge(data.license)}
-
+  return `# ${data.title} ${renderLicenseBadge(data.License)}
+  
   ## Description
   ${data.description}
-
-  ${renderAppScreenshot(data.imagePath, data.imageAltText,data.imageHoverText)}
-
-  ---
-  ## Table of Contents
-  1. [Installation](#installation)
-  1. [Usage](#usage)
-  ${renderLicenseTableOfContents(data.license)}
-  1. [Contributing](#contributing)
-  1. [Tests](#tests)
-  1. [Questions](#contributing)
+  
+  ${renderAppScreenshot(data.imagePath, data.imageAltText, data.imageHoverText)}
 
   ---
-  ## Installation
-  ${data.installation}
+  ${renderTableOfContents(data.includeSections)}
 
   ---
-  ## Usage
-  ${data.usage}
-
-
-  ${renderLicenseSection(data.license)}
-
-  ---
-  ## Contributing
-  ${data.contribution}
-
-  ---
-  ## Tests
-  ${data.testing}
-
-  ---
-  ## Questions
-  ${data.github}
-
+  
+  ${renderSelectedSections(data.includeSections, data)}
 `;
 }
 
 module.exports = generateMarkdown;
+
+// ## Installation
+//   ${data.Installation}
+
+//   ---
+//   ## Usage
+//   ${data.Usage}
+
+
+//   ${renderLicenseSection(data.License)}
+
+//   ---
+//   ## Contributing
+//   ${data.Contribution}
+
+//   ---
+//   ## Tests
+//   ${data.Testing}
+
+//   ---
+//   ## Questions
+//   Have more questions about the project? Feel Free to reach out to me at either of the following!
+
+//   * **GitHub**: ${data.github}
+
+//   * **Email**: ${data.email}
