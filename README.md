@@ -17,7 +17,7 @@
   * [Professional README Guide](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide) 
   * [Markdown Syntax CheatSheet](https://www.markdownguide.org/cheat-sheet/)
   
-  ![App Screenshot](assets\Screenshot.jpg "App Screenshot")
+  ![App Screenshot](assets/Screenshot.jpg "App Screenshot")
 
   ---
   ## Table of Contents
