@@ -84,8 +84,6 @@ function licenseLegalTerms(license) {
   }  
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
 
 
 function renderAppScreenshot(imagePath, altText, hoverText) {
@@ -103,6 +101,9 @@ function renderTableOfContents(includedSectionArray) {
   console.log("The result is: ", tableOfContents);
   return tableOfContents;
 };
+
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
 
 function renderLicenseSection(license) {
   if (license === "") {return ""};
@@ -174,7 +175,7 @@ ${data[includedSectionArray[i]]}
 
 `;
   }
-  console.log("The sections returned are as follows:", sections)
+  // console.log("The sections returned are as follows:", sections)
   return sections;
 }
 
