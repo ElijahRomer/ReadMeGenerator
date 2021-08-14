@@ -52,25 +52,25 @@ node index.js
 
 ## Usage
     
-This application is useful for quickly generating complete and professional-looking readme files. It utilizes a Command Line Interface (CLI) and a series of prompts based on the Inquirer Node.js module to achieve this. 
+This application is useful for quickly generating complete and professional readme files. It utilizes a Command Line Interface (CLI) and a series of prompts based on the Inquirer Node.js module to achieve this. 
 
-README Generator is initalized by navigating the the project directory in the terminal and running the following command:
+README Generator is initalized by navigating to the project directory in the terminal and running the following command:
 
 ```bash
 node index.js
 ```
 
+**_Please be advised that if the README filename entered is already in use by a pre-existing file in the targeted directory, THE APPLICATION WILL OVERWRITE THAT FILE._** 
+
+Please note that the prompt sequence and README write can be aborted in the terminal at any time by pressing `ctrl + c`.
+
 ## Text Editor Prompts
 
 Some of the prompts with the potential for longer entries will open the default text editor to allow the user to edit and write longer entries in a more user-friendly fashion. These sections are marked in this readme next to the header with `(Text Editor Prompt)`. 
 
-To open the response file with the text editor, the CLI will prompt the user to hit enter. Please note that the text editor may only open in the background and may need to be brought up via the task bar. The text input will follow markdown syntax so feel free to customize sections as desired. A general guide to markdown syntax can be found [here](). 
+To open the response file with the text editor, the CLI will prompt the user to hit enter. Please note that the text editor may only open in the background and may need to be brought up via the task bar. The text input will follow markdown syntax so feel free to customize sections as desired. A general guide to markdown syntax can be found [here](https://www.markdownguide.org/cheat-sheet/). 
 
 A header for the section is not required in the response as these are automatically generated. Once finished writing the section content, you need only save the file and exit the text editor to record the response and proceed to the next prompt in the terminal.
-
-**_Please be advised that if the README filename entered is already in use by a pre-existing file in the targeted directory, THE APPLICATION WILL OVERWRITE THAT FILE._** 
-
-Please note that the prompt sequence and README write can be aborted in the terminal at any time by pressing `ctrl + c`.
 
 ## Required Prompts
 
@@ -123,7 +123,7 @@ This section is included so that the user may include documentation and instruct
 
 **_Contribution_** `(Text Editor Prompt)`
 
-This section is included so that the user may include guidelines for open source or collaborative efforts to further develop features and functionality of their project. It can define a standardized process of contribution (such as pull request protocol), syntax guidelines, naming conventions, and so forth.
+This section is included so that the user may include guidelines for open source or collaborative efforts to further develop features and functionality of their project. It can define a standardized process of contribution (such as pull request protocol), syntax guidelines, variable naming conventions, and so forth.
 
 **_Testing_** `(Text Editor Prompt)`
 
@@ -131,14 +131,14 @@ This section is included to define the tests that a user has performed on a proj
 
 **_License_** `(Select From List Prompt)`
 
-This section is included to clearly state the usage license that the project is covered by. It auto generates the license sheild badge next to the Title, as well as the full license explanation section. 
+This section is included to clearly state the usage license that the project is covered by. It auto generates the license shield badge next to the Title, as well as the full license explanation section. 
 
 The user will be prompted to select from a list of licenses. If the blank option is selected, the section will be omitted regardless of if it was selected as included in the "Include Sections" prompt. 
 
 **_Questions_** `(Text Editor Prompt)`
 
 This section is included to allow other users and collaborators to reach you should further questions or support be needed. It will prompt for: 
-* a synopsis of your contact _situation_.
+* A synopsis of your contact _situation_, (such as work obligations, availability schedule, hours of operation, etc. The default response may be selected if you wish to avoid divulging this information.)  
 * Select from a list of pre-formatted contact methods. 
 
 As of README Generator v1.0.0, prompts for your GitHub, Email, and Twitter accounts are included. More mediums of contact will be added in subsequent versions. In the meantime, additional mediums may be manually added. 
@@ -158,7 +158,7 @@ Please see the "Questions" section if you would like to reach me directly to dis
 
 ## Testing
     
-I have yet to create a test suite for this project as of v1.0.0. My preference is Jest for purposes of TDD. If you would like to submit a test suite, please refer to the contribution guidelines in the Contribute section or reach out to me via any of the methods listed in the "Questions" section.
+I have yet to create a test suite for this project as of v1.0.0. My preference is Jest for purposes of TDD. If you would like to submit a test suite, please refer to the contribution guidelines in the [Contribution](#contribution) section or reach out to me via any of the methods listed in the "Questions" section.
 
 As of v1.0.0, my testing has consisted of console.log() and checking outputs by running the program locally. All functionality appears to be in order as of v1.0.0 but if bugs do arise please do not hesitate to let me know about them! I intend to utilize TDD for further progress on this project via the Jest test suite.
 
