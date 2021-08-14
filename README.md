@@ -160,7 +160,7 @@ Please see the "Questions" section if you would like to reach me directly to dis
     
 I have yet to create a test suite for this project as of v1.0.0. My preference is Jest for purposes of TDD. If you would like to submit a test suite, please refer to the contribution guidelines in the Contribute section or reach out to me via any of the methods listed in the "Questions" section.
 
-At this point, my testing has consisted of console.log() and checking outputs by running the program locally. All functionality appears to be in order as of v1.0.0 but if bugs do arise please do not hesitate to let me know about them! I intend to utilize TDD for further progress on this project via the Jest test suite.
+As of v1.0.0, my testing has consisted of console.log() and checking outputs by running the program locally. All functionality appears to be in order as of v1.0.0 but if bugs do arise please do not hesitate to let me know about them! I intend to utilize TDD for further progress on this project via the Jest test suite.
 
 ---
 
