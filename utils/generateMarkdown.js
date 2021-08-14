@@ -105,6 +105,7 @@ function renderTableOfContents(includedSectionArray) {
 };
 
 function renderLicenseSection(license) {
+  if (license === "") {return ""};
   return `## License
   
   This application is licensed under **${licenseNameVerbose(license)}**.
@@ -121,19 +122,38 @@ function renderLicenseSection(license) {
   `
 };
 
+function fixTwitterHandle(twitterHandle) {
+  if (!twitterHandle.includes(`@`)){
+    return twitterHandle;
+  }
+  return twitterHandle.slice(1, twitterHandle.length);
+}
+
 function renderQuestionsSection(data) {
-  return `## Questions
+  let questionSection = `## Questions
   
 ${data.Questions}
 
-* GitHub: [${data.GitHub}](https://www.github.com/${data.GitHub} "Click to view my projects!")
-* Email: [${data.Email}](mailto:${data.Email} "Click to send me an Email!")
+`
+// let dataKeyArray = Object.keys(data)
+for (let i = 0; i <data.ContactMethods.length; i++) {
+  switch(data.ContactMethods[i]) {
+    case `GitHub`:
+      questionSection += `* GitHub: [${data.GitHub}](http://www.github.com/${data.GitHub})\n`
+      break;
+    case `Email`:
+      questionSection += `* Email: [${data.Email}](mailto:${data.Email})\n`
+      break;
+    case `Twitter`:
+      questionSection += `* Twitter: [${data.Twitter}](http://www.twitter.com/${fixTwitterHandle(data.Twitter)})\n`
+      break;
+  }
+}
+return questionSection +=`
 
-Thank you and I will get back to you shortly! :)
+Thank you for reaching out and I look forward to getting in touch with you soon!
 
----
-
-  `
+`
 }
 
 function renderSelectedSections(includedSectionArray, data) {
@@ -177,29 +197,3 @@ function generateMarkdown(data) {
 }
 
 module.exports = generateMarkdown;
-
-// ## Installation
-//   ${data.Installation}
-
-//   ---
-//   ## Usage
-//   ${data.Usage}
-
-
-//   ${renderLicenseSection(data.License)}
-
-//   ---
-//   ## Contributing
-//   ${data.Contribution}
-
-//   ---
-//   ## Tests
-//   ${data.Testing}
-
-//   ---
-//   ## Questions
-//   Have more questions about the project? Feel Free to reach out to me at either of the following!
-
-//   * **GitHub**: ${data.github}
-
-//   * **Email**: ${data.email}

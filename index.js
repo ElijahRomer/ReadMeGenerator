@@ -32,7 +32,7 @@ const questions = [
   { type: "input",
     name: "imagePath",
     message: "If you would like to add a screenshot of your application, please copy and paste the relative path or URL here. Otherwise, hit enter to skip.",
-    default: "instructions\\kitty.jpg"
+    default: "instructions/kitty.jpg"
   },
       { type: "input",
         name: "imageAltText",
@@ -85,8 +85,16 @@ const questions = [
   { type: "checkbox",
     name: "ContactMethods",
     message: "Please select the ways in which users may contact you",
-    default: [`Email`,`GitHub`],
-    choices: [`Email`,`GitHub`],
+    default: [
+      `Email`,
+      `GitHub`, 
+      `Twitter`
+    ],
+    choices: [
+      `Email`,
+      `GitHub`, 
+      `Twitter`
+    ],
     when: (answers) => answers.includeSections.includes("Questions")
   },
       { type: "input",
@@ -100,6 +108,12 @@ const questions = [
         message: "Please enter your Email to populate to contact methods.",
         default: "Romere88@gmail.com",
         when: (answers) => answers.ContactMethods.includes(`Email`)
+      },
+      { type: "input",
+        name: "Twitter",
+        message: "Please enter your Twitter handle to populate to contact methods.",
+        default: "@McConaughey",
+        when: (answers) => answers.ContactMethods.includes(`Twitter`)
       },
   { type: "list",
     name: "License",

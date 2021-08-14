@@ -17,7 +17,9 @@
   "keywords": [
     "CLI",
     "readme",
-    "generator"
+    "generator",
+    "license",
+    "description"
   ],
   "author": "Elijah Romer",
   "license": "ISC",
