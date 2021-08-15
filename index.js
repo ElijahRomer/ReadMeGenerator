@@ -1,3 +1,5 @@
+// Add validation for valid prompts (filename, etc)
+
 // TODO: Include packages needed for this application
 const inquirer = require(`inquirer`);
 const fs = require(`fs`);
@@ -156,6 +158,15 @@ inquirer.prompt(questions)
 })}
 
 // Function call to initialize app
-init();
+
+//logic to ensure app is not initialized twice if called from generatereadme Terminal Command
+
+if (process.argv.includes('C:\\Program Files\\nodejs\\node.exe' && 'C:\\Users\\romer\\Desktop\\GitHub-Repositories\\ReadMe-Generator\\index')){
+  console.log(`manual file init registered`)
+  init();
+}
+
+
+exports.init = init;
 
     
