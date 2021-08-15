@@ -11,6 +11,8 @@
   * Node Inquirer
 
   Developing this project was an excellent exercise in utilizing, troubleshooting, and executing JavaScript files within the Node.js runtime. Learning the Inquirer module opened my eyes to the possibilities of CLI interface applications and what they could achieve. I plan to formalize this application as a node module and install it globally on my machine for personal use.
+  
+  * **_Click [HERE](https://www.youtube.com/watch?v=C9MYzSMMPdc "README Generator Walk Through Video") to view the README Generator walk through video._**
 
   Take a look at the resources below for more best practices when using README Generator:
 
