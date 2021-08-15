@@ -11,7 +11,7 @@ Technologies used include:
 - Node.js
 - Node Inquirer
 
-Developing this project was an excellent exercise in utilizing, troubleshooting, and executing JavaScript files within the Node.js runtime. I learned how to create my own npm modules that I can install globally to create custom commands for my terminal. Learning the Inquirer module opened my eyes to the possibilities of CLI interface applications and what they could achieve. I plan to formalize this application as a node module and install it globally on my machine for personal use.
+Developing this project was an excellent exercise in utilizing, troubleshooting, and executing JavaScript files within the Node.js runtime. I learned how to create my own npm modules that I can install globally, and create custom commands for my terminal to initialize them anywhere. Learning the Inquirer module opened my eyes to the possibilities of CLI interface applications and what they could achieve.
 
 - **_Click [HERE](https://www.youtube.com/watch?v=C9MYzSMMPdc 'README Generator Walk Through Video') to view the README Generator walk through video._**
 
