@@ -98,20 +98,29 @@ const questions = [
       { type: "input",
         name: "GitHub",
         message: "Please enter your GitHub username to populate to contact methods.",
-        // default: "ElijahRomer",
-        when: (answers) => answers.ContactMethods.includes(`GitHub`)
+        when: (answers) => {
+          if(answers.includeSections.includes(`Questions`) && answers.ContactMethods.includes(`GitHub`)){
+            return true;
+          }
+        }
       },
       { type: "input",
         name: "Email",
         message: "Please enter your Email to populate to contact methods.",
-        // default: "Romere88@gmail.com",
-        when: (answers) => answers.ContactMethods.includes(`Email`)
+        when: (answers) => {
+          if(answers.includeSections.includes(`Questions`) && answers.ContactMethods.includes(`Email`)){
+            return true;
+          }
+        }
       },
       { type: "input",
         name: "Twitter",
         message: "Please enter your Twitter handle to populate to contact methods.",
-        // default: "@McConaughey",
-        when: (answers) => answers.ContactMethods.includes(`Twitter`)
+        when: (answers) => {
+          if(answers.includeSections.includes(`Questions`) && answers.ContactMethods.includes(`Twitter`)){
+            return true;
+          }
+        }
       },
   { type: "list",
     name: "License",
@@ -144,9 +153,11 @@ function writeToFile(fileName, data) {
   let markdown = generateMarkdown(data);
   fs.writeFile(`${fileName}.md`, markdown, (err) => {
     if (err) {
-      console.log(`something went wrong`, err);
+      console.log(`Something went wrong`, err);
     }
-    else {console.log(`Data Written`)}
+    else {
+      console.log(`${data.fileName}.md successfully generated at ${fileName}`);
+    }
   })
 }
 
@@ -161,11 +172,30 @@ inquirer.prompt(questions)
 
 //logic to ensure app is not initialized twice if called from generatereadme Terminal Command
 
-if (process.argv.includes('C:\\Program Files\\nodejs\\node.exe' && 'C:\\Users\\romer\\Desktop\\GitHub-Repositories\\ReadMe-Generator\\index')){
-  console.log(`manual file init registered`)
-  init();
+let terminalArgs = process.argv;
+
+let extractedTerminalArgs = terminalArgs.map((arg) => {
+  if (arg.includes(`node.exe`)){
+    return arg.substr(arg.indexOf(`node.exe`), 8);
+  }
+  if (arg.includes(`index`)){
+    return arg.substr(arg.indexOf(`index`), 5);
+  }
+return false;
+})
+
+let checkTerminalArgs = (extractedTerminalArgs) => {
+  if (extractedTerminalArgs.includes(false)) {
+    console.log(`Initializing README Generator...`);
+    return;
+  }
+  if (extractedTerminalArgs.includes(`node.exe`) && extractedTerminalArgs.includes(`index`)){
+    console.log(`Initializing README Generator...`);
+    init();
+  }
 }
 
+checkTerminalArgs(extractedTerminalArgs);
 
 exports.init = init;
 

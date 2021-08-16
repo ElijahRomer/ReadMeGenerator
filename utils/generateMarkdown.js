@@ -85,20 +85,32 @@ function licenseLegalTerms(license) {
 }
 
 
+//Bash Terminal uses / Linux whereas copying filepath in windows uses \. Causes issue when copying/pasting  filepath in Windows. The below code does not work as the bash terminal delivers the filepath with the file separators treated like escape characters. Researching workaround. 
+
+// function fixImagePath (imagePath) {
+//   for (let i = 0; i < imagePath.length; i++) {
+//     if (imagePath[i] === "\\") {
+//       imagePath.replace(/\\/g, "/")
+//     }
+//   }
+// }
 
 function renderAppScreenshot(imagePath, altText, hoverText) {
+  //if imagePath contains \, replace with /
   if (imagePath === ""){
-    return ""
+    return "";
   }
   return  `![${altText}](${imagePath} "${hoverText}")`
 }
 
 function renderTableOfContents(includedSectionArray) {
+  if (includedSectionArray.length <= 1){
+    return "";
+  }
   let tableOfContents = `## Table of Contents`;
   for (let i = 0; i < includedSectionArray.length; i++) {
     tableOfContents += `\n1. [${includedSectionArray[i]}](#${includedSectionArray[i].toLowerCase()})`;
   }
-  console.log("The result is: ", tableOfContents);
   return tableOfContents;
 };
 
@@ -136,7 +148,6 @@ function renderQuestionsSection(data) {
 ${data.Questions}
 
 `
-// let dataKeyArray = Object.keys(data)
 for (let i = 0; i <data.ContactMethods.length; i++) {
   switch(data.ContactMethods[i]) {
     case `GitHub`:
@@ -175,7 +186,6 @@ ${data[includedSectionArray[i]]}
 
 `;
   }
-  // console.log("The sections returned are as follows:", sections)
   return sections;
 }
 
